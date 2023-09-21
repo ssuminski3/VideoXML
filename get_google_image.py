@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def DownloadImageGoogle(search_term, path):
+def DownloadImageGoogle(search_term, path, name):
     url = rf'https://www.google.no/search?q={search_term}&client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&safe=active&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
     page = requests.get(url).text
     soup = BeautifulSoup(page, 'html.parser')
@@ -18,7 +18,7 @@ def DownloadImageGoogle(search_term, path):
 
         pass
     response = requests.get(link)
-    with open(path+"/"+search_term+".jpg", "wb") as f:
+    with open(path+"/"+name+".jpg", "wb") as f:
         f.write(response.content)
 
 def download_image(url, save_path):
