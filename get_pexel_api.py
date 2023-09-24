@@ -20,7 +20,7 @@ def download_pexels(query, image_path, name):
     PAGE_LIMIT = 10
     RESULTS_PER_PAGE = 10
 
-    PEXELS_API_KEY = "fNlaJ3bFn7PaAyhzymmkdDhjZjqHdql8W1kcoBzbK9MBd6hoPNg2o0uU"
+    PEXELS_API_KEY = "YOUR_API_KEY"
     api = API(PEXELS_API_KEY)
     photos_dict = {}
     page = 1
@@ -61,3 +61,51 @@ def download_pexels(query, image_path, name):
                 print(f"File {image_path} exists")
 
 
+def download_video_pexels(query, root_dir="./"):
+    # Define Pexels API URL for videos
+    api_url = "https://api.pexels.com/videos/search"
+
+    # Set your Pexels API key here
+    api_key = "YOUR_API_KEY"
+
+    # Define parameters for the API request
+    params = {
+        "query": query,
+        "per_page": 1  # Set to 1 to download only one video
+    }
+
+    headers = {
+        "Authorization": api_key
+    }
+
+    # Make the API request
+    response = requests.get(api_url, params=params, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+
+        # Extract the download URL of the first video (if available)
+        if data.get("videos"):
+            download_url = data["videos"][0].get("video_files", [])[0].get("link")
+            if download_url:
+                # Generate the file name based on the query
+                fname = f"{query}_video.mp4"
+
+                # Define the file path
+                fpath = Path(root_dir, fname)
+
+                # Check if the file already exists
+                if fpath.exists():
+                    print("Exists:", fpath)
+                else:
+                    # Download the video
+                    response = requests.get(download_url)
+                    with open(str(fpath), "wb") as file:
+                        file.write(response.content)
+                    print("Downloaded:", fpath)
+            else:
+                print("No download URL found for the video.")
+        else:
+            print("No videos found for the query.")
+    else:
+        print(f"Error {response.status_code}: {response.text}")
