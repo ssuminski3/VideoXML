@@ -61,7 +61,7 @@ def download_pexels(query, image_path, name):
                 print(f"File {image_path} exists")
 
 
-def download_video_pexels(query, root_dir="./"):
+def download_video_pexels(query, fname, root_dir="./"):
     # Define Pexels API URL for videos
     api_url = "https://api.pexels.com/videos/search"
 
@@ -88,10 +88,6 @@ def download_video_pexels(query, root_dir="./"):
         if data.get("videos"):
             download_url = data["videos"][0].get("video_files", [])[0].get("link")
             if download_url:
-                # Generate the file name based on the query
-                fname = f"{query}_video.mp4"
-
-                # Define the file path
                 fpath = Path(root_dir, fname)
 
                 # Check if the file already exists
