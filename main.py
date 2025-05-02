@@ -85,16 +85,16 @@ def get_files_in_folder(folder_path):
 
 if __name__ == '__main__':
     #dir = get_subdirectories(r"C:\Users\sebas\OneDrive\Pulpit\Tabele_do_tworzenia")
-    project_folder = r"C:\Users\sebas\OneDrive\Pulpit\VideoXML_v2"
+    project_folder = r"./"
     extensions_to_delete = [".mp4", ".mp3", ".json"]
     delete_files_with_extensions(project_folder, extensions_to_delete)
 
-    files = get_files_in_folder(r"C:\Users\sebas\OneDrive\Pulpit\VideoXML_v2\XMLS")
+    files = get_files_in_folder(r"./XMLS")
     for f in files:
         try:
             output = XMLReader.Read(f)
-            move_file(output, r"C:\Users\sebas\OneDrive\Pulpit\VideoXML_v2\FILMS")
-            move_file(f, r"C:\Users\sebas\OneDrive\Pulpit\VideoXML_v2\DONE")
+            move_file(output, r"./FILMS")
+            move_file(f, r"./DONE")
             delete_files_with_extensions(project_folder, extensions_to_delete)
         except:
             delete_files_with_extensions(project_folder, extensions_to_delete)

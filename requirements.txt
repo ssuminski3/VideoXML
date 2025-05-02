@@ -1,0 +1,13 @@
+beautifulsoup4==4.13.4
+gtts==2.5.4
+imageio==2.37.0
+moviepy==1.0.3
+mutagen==1.47.0
+natsort==8.4.0
+pexels_api==1.0.1
+Pillow==10.0.0
+Requests==2.32.3
+tqdm==4.67.1
+whisper
+opencv-python==4.8.1.78
+numpy==1.26.2
