@@ -74,7 +74,7 @@ def connect_video_to_audio(video_path, audio_path, output_path):
         print(f"Error: {e}")
 def FindEveryFile(path):
     # absolute path to search all text files inside a specific folder
-    path = path+'\*mp4'
+    path = path+'/*mp4'
     files = glob.glob(path)
     from natsort import os_sorted
 
@@ -85,8 +85,10 @@ def merge_videos(paths, output_path, method="compose"):
     `method` can be either 'compose' or 'reduce':
         `reduce`: Reduce the quality of the video to the lowest quality on the list of `video_clip_paths`.
         `compose`: type help(concatenate_videoclips) for the info"""
+    print("Merging starts")
     # create VideoFileClip object for each video file
     video_clip_paths = FindEveryFile(paths)
+    print(video_clip_paths)
     clips = [VideoFileClip(c) for c in video_clip_paths]
     if method == "reduce":
         # calculate minimum width & height across all clips

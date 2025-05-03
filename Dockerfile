@@ -1,23 +1,19 @@
-FROM python:3.11
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the requirements file into the container
-COPY requirements.txt .
-
-# Install the dependencies
-RUN pip install -r requirements.txt
+FROM python:3.11-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install ffmpeg
+WORKDIR /app
+
+# System-level deps: ffmpeg, image/video libs for opencv, moviepy, whisper
 RUN apt-get update && \
-    apt-get install -y ffmpeg && \
+    apt-get install -y ffmpeg libsm6 libxext6 && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the rest of the application code into the container
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# Command to run the application
 CMD ["python", "main.py"]
