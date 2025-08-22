@@ -70,16 +70,16 @@ Enter: string
 
 Then paste your XML content directly when asked.
 
-✅ Final video will be moved to /FILMS.
+#✅ Final video will be moved to /FILMS.
 
-⚙️ Requirements
+## ⚙️ Requirements
 
-Install dependencies:
+#Install dependencies:
 ```console
 pip install -r requirements.txt
 ```
 
-Ensure you also have:
+#Ensure you also have:
 
 Python 3.8+
 
